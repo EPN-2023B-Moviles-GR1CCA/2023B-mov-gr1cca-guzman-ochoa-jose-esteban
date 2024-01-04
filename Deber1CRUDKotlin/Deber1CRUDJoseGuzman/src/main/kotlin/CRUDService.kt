@@ -15,7 +15,7 @@ class CRUDService {
 
     fun leerMarcas(): List<MarcaComputador> {
         val typeToken = object : TypeToken<List<MarcaComputador>>() {}
-        return leerArchivo(marcasFileName, typeToken)
+        return leerArchivo(marcasFileName, typeToken) ?: emptyList()
     }
 
     fun actualizarMarca(nombre: String, nuevaMarca: MarcaComputador) {
@@ -44,7 +44,7 @@ class CRUDService {
 
     fun leerComputadores(): List<Computador> {
         val typeToken = object : TypeToken<List<Computador>>() {}
-        return leerArchivo(computadoresFileName, typeToken)
+        return leerArchivo(computadoresFileName, typeToken) ?: emptyList()
     }
 
     fun actualizarComputador(modelo: String, nuevoComputador: Computador) {
@@ -65,9 +65,9 @@ class CRUDService {
         guardarArchivo(computadoresFileName, computadores)
     }
 
-    fun <T> leerArchivo(fileName: String, typeToken: TypeToken<T>): T {
+    fun <T> leerArchivo(fileName: String, typeToken: TypeToken<List<T>>): List<T> {
         val file = File(fileName)
-        if (!file.exists()) return listOf<T>() as T
+        if (!file.exists()) return emptyList()
         val json = file.readText()
         return Gson().fromJson(json, typeToken.type)
     }
