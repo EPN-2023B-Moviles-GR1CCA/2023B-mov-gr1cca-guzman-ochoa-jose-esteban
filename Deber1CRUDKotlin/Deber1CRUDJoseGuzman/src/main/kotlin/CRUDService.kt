@@ -67,9 +67,15 @@ class CRUDService {
 
     fun <T> leerArchivo(fileName: String, typeToken: TypeToken<List<T>>): List<T> {
         val file = File(fileName)
-        if (!file.exists()) return emptyList()
+
+        if (!file.exists() || file.readText().isEmpty()) return emptyList()
+
         val json = file.readText()
-        return Gson().fromJson(json, typeToken.type)
+        return try {
+            Gson().fromJson(json, typeToken.type) ?: emptyList()
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 
     private fun <T> guardarArchivo(fileName: String, data: List<T>) {
