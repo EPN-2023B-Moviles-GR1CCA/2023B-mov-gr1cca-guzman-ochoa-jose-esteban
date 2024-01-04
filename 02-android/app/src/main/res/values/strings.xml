@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name" translatable="false">JoseGuzmanApp</string>
+    <string name="myText">Texto Default</string>
+    <string name="title_activity_cl">ClActivity</string>
+</resources>
