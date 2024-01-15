@@ -2,4 +2,8 @@
     <string name="app_name" translatable="false">JoseGuzmanApp</string>
     <string name="myText">Texto Default</string>
     <string name="title_activity_cl">ClActivity</string>
+    <string-array name="string_array_opciones_dialogo">
+        <item>Editar</item>
+        <item>Eliminar</item>
+    </string-array>
 </resources>
