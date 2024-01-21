@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnAddMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar Marca" />
+
+    <Button
+        android:id="@+id/btnReadMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver Marcas" />
+
+    <Button
+        android:id="@+id/btnDeleteMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Marca" />
+
+    <Button
+        android:id="@+id/btnUpdateMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Actualizar Marca" />
+
+</LinearLayout>
