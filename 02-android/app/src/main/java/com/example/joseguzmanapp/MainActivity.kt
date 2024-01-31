@@ -11,9 +11,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val botonSqlite = findViewById<Button>(R.id.btn_sqlite)
-        botonSqlite.setOnClickListener {
-            irActividad(ECrudEntrenador::class.java)
+        val botonGoogleMaps = findViewById<Button>(R.id.btn_gmaps)
+        botonGoogleMaps.setOnClickListener {
+            irActividad(GoogleMapsInicio::class.java)
         }
 
     }
