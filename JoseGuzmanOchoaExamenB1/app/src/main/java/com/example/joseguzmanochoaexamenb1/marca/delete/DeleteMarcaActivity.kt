@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.joseguzmanochoaexamenb1.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class DeleteMarcaActivity : ComponentActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -31,8 +34,10 @@ class DeleteMarcaActivity : ComponentActivity() {
     }
 
     private fun actualizarLista() {
-        val marcas = crudService.leerMarcas()
-        adaptador = MarcasEliminarAdapter(marcas, this::eliminarMarca)
-        recyclerView.adapter = adaptador
+        CoroutineScope(Dispatchers.Main).launch {
+            val marcas = crudService.leerMarcas()
+            adaptador = MarcasEliminarAdapter(marcas, this@DeleteMarcaActivity::eliminarMarca)
+            recyclerView.adapter = adaptador
+        }
     }
 }

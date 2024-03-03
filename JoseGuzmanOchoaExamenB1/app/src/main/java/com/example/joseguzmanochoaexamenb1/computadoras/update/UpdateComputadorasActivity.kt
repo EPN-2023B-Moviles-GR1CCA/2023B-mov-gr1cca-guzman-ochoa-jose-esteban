@@ -14,6 +14,9 @@ import com.example.joseguzmanochoaexamenb1.R
 import com.example.joseguzmanochoaexamenb1.models.Computador
 import com.example.joseguzmanochoaexamenb1.models.TipoComputador
 import com.example.joseguzmanochoaexamenb1.service.CRUDService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class UpdateComputadorasActivity : ComponentActivity() {
     private lateinit var spinnerComputadoras: Spinner
@@ -48,10 +51,12 @@ class UpdateComputadorasActivity : ComponentActivity() {
     }
 
     private fun cargarComputadoras() {
-        computadoras = crudService.leerComputadores()
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, computadoras.map { it.modelo })
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerComputadoras.adapter = adapter
+        CoroutineScope(Dispatchers.Main).launch {
+            computadoras = crudService.leerComputadores()
+            val adapter = ArrayAdapter(this@UpdateComputadorasActivity, android.R.layout.simple_spinner_item, computadoras.map { it.modelo })
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerComputadoras.adapter = adapter
+        }
     }
 
     private fun configurarSpinnerComputadoras() {

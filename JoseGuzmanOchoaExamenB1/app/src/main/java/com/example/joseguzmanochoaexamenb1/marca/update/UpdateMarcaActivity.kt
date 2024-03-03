@@ -8,6 +8,9 @@ import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import com.example.joseguzmanochoaexamenb1.R
 import com.example.joseguzmanochoaexamenb1.service.CRUDService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class UpdateMarcaActivity : ComponentActivity() {
 
@@ -23,14 +26,17 @@ class UpdateMarcaActivity : ComponentActivity() {
     }
 
     private fun mostrarMarcas() {
-        val marcas = crudService.leerMarcas()
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, marcas.map { it.nombre })
-        listView.adapter = adapter
+        CoroutineScope(Dispatchers.Main).launch {
+            val marcas = crudService.leerMarcas() // Asume que leerMarcas es una suspending function
+            val adapter = ArrayAdapter(this@UpdateMarcaActivity, android.R.layout.simple_list_item_1, marcas.map { it.nombre })
+            listView.adapter = adapter
 
-        listView.setOnItemClickListener { _, _, position, _ ->
-            val intent = Intent(this, UpdateSingleMarcaActivity::class.java)
-            intent.putExtra("nombreMarca", marcas[position].nombre)
-            startActivity(intent)
+            listView.setOnItemClickListener { _, _, position, _ ->
+                val intent = Intent(this@UpdateMarcaActivity, UpdateSingleMarcaActivity::class.java).apply {
+                    putExtra("nombreMarca", marcas[position].nombre)
+                }
+                startActivity(intent)
+            }
         }
     }
 

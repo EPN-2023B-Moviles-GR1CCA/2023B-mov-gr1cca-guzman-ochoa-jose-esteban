@@ -17,6 +17,9 @@ import com.example.joseguzmanochoaexamenb1.R
 import com.example.joseguzmanochoaexamenb1.marca.update.ui.theme.JoseGuzmanOchoaExamenB1Theme
 import com.example.joseguzmanochoaexamenb1.models.MarcaComputador
 import com.example.joseguzmanochoaexamenb1.service.CRUDService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 
 class UpdateSingleMarcaActivity : ComponentActivity() {
@@ -52,12 +55,15 @@ class UpdateSingleMarcaActivity : ComponentActivity() {
     }
 
     private fun cargarDatosMarca(nombreMarca: String?) {
-        nombreMarca?.let {
-            val marca = crudService.leerMarcas().find { it.nombre == nombreMarca }
-            marca?.let {
-                editTextNombre.setText(marca.nombre)
-                editTextPaisOrigen.setText(marca.paisOrigen)
-                anoFundacion.setText(marca.añoFundacion.toString())
+        nombreMarca?.let { nombre ->
+            CoroutineScope(Dispatchers.Main).launch {
+                val marcas = crudService.leerMarcas() // Asume que leerMarcas ahora es una suspending function
+                val marca = marcas.find { it.nombre == nombre }
+                marca?.let {
+                    editTextNombre.setText(marca.nombre)
+                    editTextPaisOrigen.setText(marca.paisOrigen)
+                    anoFundacion.setText(marca.añoFundacion.toString())
+                }
             }
         }
     }

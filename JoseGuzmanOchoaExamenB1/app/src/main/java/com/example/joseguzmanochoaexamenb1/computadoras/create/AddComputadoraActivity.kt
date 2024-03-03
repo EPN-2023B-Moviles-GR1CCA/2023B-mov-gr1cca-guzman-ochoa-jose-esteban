@@ -1,5 +1,6 @@
 package com.example.joseguzmanochoaexamenb1.computadoras.create
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -10,11 +11,15 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.annotation.RequiresApi
 import com.example.joseguzmanochoaexamenb1.R
 import com.example.joseguzmanochoaexamenb1.models.Computador
 import com.example.joseguzmanochoaexamenb1.models.MarcaComputador
 import com.example.joseguzmanochoaexamenb1.models.TipoComputador
 import com.example.joseguzmanochoaexamenb1.service.CRUDService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class AddComputadoraActivity : ComponentActivity() {
     private lateinit var spinnerMarcas: Spinner
@@ -28,6 +33,7 @@ class AddComputadoraActivity : ComponentActivity() {
     private lateinit var crudService: CRUDService
     private var marcas: List<MarcaComputador> = listOf()
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.computadoras_create_activity)
@@ -47,11 +53,14 @@ class AddComputadoraActivity : ComponentActivity() {
         configurarSpinnerMarcas()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun cargarMarcas() {
-        marcas = crudService.leerMarcas()
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, marcas.map { it.nombre })
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinnerMarcas.adapter = adapter
+        CoroutineScope(Dispatchers.Main).launch {
+            marcas = crudService.leerMarcas()
+            val adapter = ArrayAdapter(this@AddComputadoraActivity, android.R.layout.simple_spinner_item, marcas.map { it.nombre })
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerMarcas.adapter = adapter
+        }
     }
 
     private fun configurarSpinnerMarcas() {

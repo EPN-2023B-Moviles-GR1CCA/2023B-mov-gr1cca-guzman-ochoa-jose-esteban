@@ -7,6 +7,9 @@ import android.widget.ListView
 import androidx.activity.ComponentActivity
 import com.example.joseguzmanochoaexamenb1.R
 import com.example.joseguzmanochoaexamenb1.service.CRUDService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ReadComputadorasActivity : ComponentActivity() {
     private lateinit var listViewComputadoras: ListView
@@ -23,8 +26,11 @@ class ReadComputadorasActivity : ComponentActivity() {
     }
 
     private fun cargarComputadoras() {
-        val computadoras = crudService.leerComputadores()
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, computadoras.map { "${it.nombreMarca} - ${it.modelo}" })
-        listViewComputadoras.adapter = adapter
+        CoroutineScope(Dispatchers.Main).launch {
+            val computadoras = crudService.leerComputadores()
+            println("COMPUTADORAS" + computadoras)
+            val adapter = ArrayAdapter(this@ReadComputadorasActivity, android.R.layout.simple_list_item_1, computadoras.map { "${it.nombreMarca} - ${it.modelo}" })
+            listViewComputadoras.adapter = adapter
+        }
     }
 }

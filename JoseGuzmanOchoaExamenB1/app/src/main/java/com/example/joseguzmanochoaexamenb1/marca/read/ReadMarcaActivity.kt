@@ -7,22 +7,32 @@ import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.joseguzmanochoaexamenb1.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ReadMarcaActivity : ComponentActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var marcasReadAdapter: MarcasReadAdapter
+    private lateinit var crudService: CRUDService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.marca_read_activity)
 
+
         recyclerView = findViewById(R.id.marcasRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val crudService = CRUDService(this)
-        val marcas = crudService.leerMarcas()
+        crudService = CRUDService(this)
 
-        marcasReadAdapter = MarcasReadAdapter(marcas)
-        recyclerView.adapter = marcasReadAdapter
+        CoroutineScope(Dispatchers.Main).launch {
+            val marcas = crudService.leerMarcas()
+
+            println("************MARCAS: " + marcas)
+
+            marcasReadAdapter = MarcasReadAdapter(marcas)
+            recyclerView.adapter = marcasReadAdapter
+        }
     }
 }
