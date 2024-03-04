@@ -3,48 +3,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="#FFFFFF">
 
     <Spinner
         android:id="@+id/spinnerComputadoras"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="#E0E0E0"/>
 
     <EditText
         android:id="@+id/editTextModelo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Modelo" />
+        android:hint="Modelo"
+        android:layout_marginBottom="8dp"
+        android:background="#F0F0F0"
+        android:textColorHint="#9E9E9E"
+        android:textColor="#212121"/>
 
     <EditText
         android:id="@+id/editTextPrecio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Precio"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="8dp"
+        android:background="#F0F0F0"
+        android:textColorHint="#9E9E9E"
+        android:textColor="#212121"/>
 
     <Spinner
         android:id="@+id/spinnerTipo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="#E0E0E0"/>
 
     <EditText
         android:id="@+id/editTextAñoLanzamiento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Año de Lanzamiento"
-        android:inputType="number" />
+        android:inputType="number"
+        android:layout_marginBottom="8dp"
+        android:background="#F0F0F0"
+        android:textColorHint="#9E9E9E"
+        android:textColor="#212121"/>
 
     <CheckBox
         android:id="@+id/checkBoxEnProduccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="En Producción" />
+        android:text="En Producción"
+        android:layout_marginBottom="8dp"
+        android:buttonTint="#4CAF50"/>
 
     <Button
         android:id="@+id/botonActualizar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Actualizar Computadora"
-        android:onClick="onActualizarComputadoraClick" />
+        android:onClick="onActualizarComputadoraClick"
+        android:layout_marginTop="16dp"
+        android:background="#4CAF50"
+        android:textColor="#FFFFFF"/>
+
 </LinearLayout>
