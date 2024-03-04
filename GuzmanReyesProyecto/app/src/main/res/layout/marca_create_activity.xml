@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextNombreMarca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de la Marca"/>
+
+    <EditText
+        android:id="@+id/editTextPaisOrigen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="País de Origen"/>
+
+    <EditText
+        android:id="@+id/editTextAnoFundacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:hint="Año de Fundación"/>
+
+    <CheckBox
+        android:id="@+id/checkBoxEsIndependiente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Es Independiente"/>
+
+    <Button
+        android:id="@+id/buttonAgregarMarca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar Marca"/>
+</LinearLayout>
